@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego</title>
+    <link rel="stylesheet" href="estilos.css">
+
+</head>
+<body>
+
+<div class="container">
+    <h1 class="titulo">Piedra, Papel o Tijera</h1>
+    <div class="contadores">
+        <div >Máquina: <span id="marcadorMaq">0</span></div>
+        <div >Jugador: <span id="marcadorJug">0</span></div>
+        <div>Empate: <span id="empate">0</span></div>
+    </div>
+    <div class="seleccionJugador">
+        <img src="images/papelA.png" alt="Mano" id="papel" class="select">
+        <img src="images/tijeraA.png" alt="Tijera" id="tijera" class="select">
+        <img src="images/piedraA.png" alt="Piedra" id="piedra" class="select">
+    </div>
+    <div class="juego">
+        <div class="campo" id="campoJug">
+            <img src="" id="selectJugador"  alt="">
+        </div>
+        <p>VS.</p>
+        <div class="campo" id="campoMaq"
+            <img src=""  id="selectMaq"  alt="">
+        </div>
+    </div>
+    <div class="resultado">
+        <div id="res"></div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

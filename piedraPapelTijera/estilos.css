@@ -1,0 +1,82 @@
+*,*::before,*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: #303030;
+    color: white;
+    font-family: system-ui;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.container{
+    width: 600px;
+    height: 600px;
+    background: #000;
+}
+
+.titulo{
+    text-align: center;
+    text-transform: uppercase;
+    margin: 50px 0;
+}
+
+.contadores{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.seleccionJugador{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 30px 0;
+}
+
+.select{
+    cursor: pointer;
+}
+
+.juego{
+    margin: 40px 0;
+    padding: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.juego > p{
+    font-size: 25px;
+}
+
+.campo{
+    height: 120px;
+    width: 120px;
+    padding: 5px ;
+    border-radius: 50%;
+    background: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.resultado{
+    margin: 40px 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+
+
+
+
+
