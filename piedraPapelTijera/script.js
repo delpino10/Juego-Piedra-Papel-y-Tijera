@@ -1,80 +1,118 @@
 const valores = ['piedra', 'papel', 'tijera'];
-const indiceRandom = Math.floor(Math.random() * valores.length)
-const maquina = valores[indiceRandom]
-let jugador =''
+let contMaquina = 0;
+let contJugador = 0;
+let contEmpate = 0;
 
-let contMaquina = 0
-let contJugador = 0
-let contEmpate = 0
+const marcadorMaq = document.getElementById('marcadorMaq');
+const marcadorJug = document.getElementById('marcadorJug');
+const empate = document.getElementById('empate');
 
-const marcadorMaq = document.getElementById('marcadorMaq')
-const marcadorJug = document.getElementById('marcadorJug')
-const empate = document.getElementById('empate')
+const piedra = document.getElementById('piedra');
+const papel = document.getElementById('papel');
+const tijera = document.getElementById('tijera');
 
-const piedra = document.getElementById('piedra')
-const papel = document.getElementById('papel')
-const tijera = document.getElementById('tijera')
-
-const imgMaquina = document.getElementById('selectMaq')
-const imgJugador = document.getElementById('selectJugador')
+const container = document.getElementById('container')
+const imgMaquina = document.getElementById('selectMaq');
+const imgJugador = document.getElementById('selectJugador');
 const campoJug = document.getElementById('campoJug');
-const campoMaq= document.getElementById('campoMaq');
+const campoMaq = document.getElementById('campoMaq');
+const res = document.getElementById('res');
+const resFinal = document.getElementById('resFinal')
 
-const res = document.getElementById('res')
+// Mostrar mensajes según el ganador
+function verificarGanador() {
+    // Reseteamos el color del borde
+    container.style.border = '2px solid #fddc00'
+    // Vaciamos el contenido del mensaje final
+    resFinal.textContent = '';
+    if (contJugador >= 3) {
+        resFinal.textContent = '¡Ganaste la partida!';
+        container.style.border = '2px solid #75fe08'
+        reiniciarMarcadores();
+    } else if (contMaquina >= 3) {
+        resFinal.textContent = 'La Máquina ganó la partida';
+        container.style.border = '2px solid #f80860'
+        reiniciarMarcadores();
+    } else if (contEmpate >= 3) {
+        resFinal.textContent = 'Empate. Los dos a casa';
+        container.style.border = '2px solid #fff'
+        reiniciarMarcadores();
+    }
+}
 
-piedra.addEventListener("click", () => {
-    jugador = 'piedra'
-    imgMaquina.src = `../images/${maquina}.png`;
-    imgJugador.src = '../images/piedraA.png'
-    resultado(maquina, jugador)
-    marcadorJug.textContent = contJugador
-    marcadorMaq.textContent = contMaquina
-    empate.textContent = contEmpate
+// Reiniciar los marcadores a cero
+// cuando algún jugador gana tres rondas
+function reiniciarMarcadores() {
+    contJugador = 0;
+    contMaquina = 0;
+    contEmpate = 0;
+    actualizarMarcadores();
+}
 
-})
-papel.addEventListener("click", () => {
-    jugador = 'papel'
-    imgMaquina.src = `../images/${maquina}.png`;
-    imgJugador.src = '../images/papelA.png'
-    resultado(maquina, jugador)
-    marcadorJug.textContent = contJugador
-    marcadorMaq.textContent = contMaquina
-    empate.textContent = contEmpate
-})
-tijera.addEventListener("click", () => {
-    jugador = 'tijera'
-    imgMaquina.src = `../images/${maquina}.png`;
-    imgJugador.src = '../images/tijeraA.png'
-    resultado(maquina, jugador)
-    marcadorJug.textContent = contJugador
-    marcadorMaq.textContent = contMaquina
-    empate.textContent = contEmpate
-})
+// La selección del jugador y la elección aleatoria de la máquina
+function manejarSeleccion(jugador) {
+    // obtiene un número entre 1 y 3
+    const indiceRandom = Math.floor(Math.random() * valores.length);
+    // El índice indica que valor elige la máquina dentro de array valores
+    const maquina = valores[indiceRandom];
+    // Las imágenes qa mostrar según la elección de cada jugador
+    imgMaquina.src = `images/${maquina}.png`;
+    imgJugador.src = `images/${jugador}A.png`;
 
+    // Llamamos a la función para empezar a jugar
+    resultado(maquina, jugador);
+    // Actualiza los marcadores
+    actualizarMarcadores();
+    // Verifica si algún jugador ha ganado 3 rondas
+    // Muestra el mensaje correspondiente
+    verificarGanador();
+}
 
-function resultado(maquina, jugador){
+// Actualiza los marcadores en la interfaz
+function actualizarMarcadores() {
+    marcadorJug.textContent = contJugador;
+    marcadorMaq.textContent = contMaquina;
+    empate.textContent = contEmpate;
+}
 
-    campoMaq.style.background = "none"
-    campoJug.style.background = "none"
-    if(maquina === jugador){
+// Algoritmo para el desarrollo del juego
+function resultado(maquina, jugador) {
+    campoMaq.style.background = "none";
+    campoJug.style.background = "none";
+
+    // Sí hay una misma elección
+    if (maquina === jugador) {
         contEmpate++;
-        return res.innerHTML = 'Es un empate!'
+        res.textContent = '¡Es un empate!';
+        return;
     }
 
-    if(
-        (maquina === 'piedra') && (jugador === 'tijera')
-        || (maquina === 'tijera') && (jugador === 'papel')
-        || (maquina === 'papel') && (jugador === 'piedra')
-    ){
-        campoMaq.style.background = "red"
-        campoJug.style.background = "none"
+    // Piedra gana a tijera
+    // Tijera gana a papel
+    // Papel gana a piedra
+    if (
+        (maquina === 'piedra' && jugador === 'tijera') ||
+        (maquina === 'tijera' && jugador === 'papel') ||
+        (maquina === 'papel' && jugador === 'piedra')
+    ) {
+        campoMaq.style.background = "#f80860";
         contMaquina++;
-        return res.innerHTML = 'La máquina gana...'
-    }else{
-        campoMaq.style.background = "none"
-        campoJug.style.background = "green"
+        res.textContent = 'La máquina gana esta ronda...';
+    } else {
+        campoJug.style.background = "#75fe08";
         contJugador++;
-        return res.innerHTML = '¡Ganaste!'
+        res.textContent = '¡Ganaste esta ronda!';
     }
 
 }
+
+// Asignar eventos a botones
+piedra.addEventListener("click", () => manejarSeleccion('piedra'));
+papel.addEventListener("click", () => manejarSeleccion('papel'));
+tijera.addEventListener("click", () => manejarSeleccion('tijera'));
+
+
+
+
+
+

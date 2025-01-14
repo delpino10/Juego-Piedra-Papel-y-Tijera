@@ -8,8 +8,9 @@
 </head>
 <body>
 
-<div class="container">
+<div class="container" id="container">
     <h1 class="titulo">Piedra, Papel o Tijera</h1>
+    <h3 >Gana el mejor de 5 rondas</h3>
     <div class="contadores">
         <div >Máquina: <span id="marcadorMaq">0</span></div>
         <div >Jugador: <span id="marcadorJug">0</span></div>
@@ -25,7 +26,7 @@
             <img src="" id="selectJugador"  alt="">
         </div>
         <p>VS.</p>
-        <div class="campo" id="campoMaq"
+        <div class="campo" id="campoMaq">
             <img src=""  id="selectMaq"  alt="">
         </div>
     </div>
@@ -34,6 +35,10 @@
     </div>
 
 </div>
+
+    <div class="resultado-final">
+        <div id="resFinal"></div>
+    </div>
 
 <script src="script.js"></script>
 </body>
